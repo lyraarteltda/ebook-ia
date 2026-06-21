@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre — E-book IA</title>
+  <meta name="description" content="Sobre a E-book IA — gerador de e-books e iscas digitais (lead magnets) prontos para distribuir, com a sua própria chave de IA.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%232a2118'/%3E%3Crect x='9' y='7' width='14' height='18' rx='1.5' fill='%23fbf8f1'/%3E%3Crect x='9' y='7' width='3' height='18' fill='%23a8842c'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .about-page { min-height: 100vh; display: flex; flex-direction: column; }
+    .about-nav {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px clamp(16px,4vw,40px); border-bottom: 1px solid var(--rule);
+      background: var(--paper-2); position: sticky; top: 0; z-index: 100;
+    }
+    .about-nav a { color: var(--gold-deep); text-decoration: none; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+    .about-nav a:hover { color: var(--ink); }
+    .about-content { flex: 1; max-width: 760px; margin: 0 auto; padding: clamp(28px,5vw,52px) clamp(16px,4vw,24px); width: 100%; }
+    .about-hero { text-align: center; margin-bottom: 40px; }
+    .about-hero .book-mark { width: 70px; height: 86px; }
+    .about-hero h1 { font-size: clamp(30px,5vw,46px); margin-bottom: 14px; position: relative; display: inline-block; padding-bottom: 10px; }
+    .about-hero h1::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; width: 56px; height: 2px; background: var(--gold); }
+    .about-hero p { color: var(--ink-soft); font-size: 17px; max-width: 560px; margin: 14px auto 0; }
+    .about-section {
+      background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--r-lg);
+      padding: 28px 30px; margin-bottom: 18px; box-shadow: var(--shadow-soft);
+    }
+    .about-section h2 { font-size: 21px; margin-bottom: 14px; display: flex; align-items: center; gap: 11px; }
+    .about-section h2 .ico { width: 30px; height: 30px; border-radius: 7px; background: var(--gold-tint); border: 1px solid rgba(168,132,44,.35); display: inline-flex; align-items: center; justify-content: center; color: var(--gold-deep); flex-shrink: 0; }
+    .about-section p, .about-section li { color: var(--ink-soft); font-size: 15.5px; line-height: 1.75; }
+    .about-section p + p { margin-top: 12px; }
+    .steps-list { list-style: none; counter-reset: steps; padding: 0; }
+    .steps-list li { counter-increment: steps; display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); align-items: flex-start; }
+    .steps-list li:last-child { border-bottom: none; }
+    .steps-list li::before {
+      content: counter(steps); min-width: 32px; height: 32px;
+      background: linear-gradient(180deg,#b8923a,var(--gold-deep)); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff7e6; flex-shrink: 0; font-family: var(--sans);
+    }
+    .byok-highlight { background: var(--gold-tint); border: 1px solid rgba(168,132,44,.3); border-radius: var(--r-md); padding: 18px 20px; margin-top: 8px; }
+    .byok-highlight strong { color: var(--gold-deep); }
+    .services-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .service-badge { background: var(--paper-3); color: var(--ink-soft); border: 1px solid var(--rule); padding: 5px 14px; border-radius: 100px; font-size: 13px; font-weight: 600; }
+    .cta-section { text-align: center; padding: 36px 20px 16px; }
+    .cta-btn { display: inline-block; padding: 15px 44px; background: linear-gradient(180deg,#b8923a,var(--gold-deep)); color: #fff7e6; border-radius: var(--r-md); font-size: 16px; font-weight: 700; text-decoration: none; box-shadow: 0 10px 22px -12px rgba(138,106,31,.8); }
+    .cta-btn:hover { filter: brightness(1.05); }
+    .about-footer { text-align: center; padding: 28px; color: var(--ink-faint); font-size: 13px; border-top: 1px solid var(--rule); background: var(--paper-2); }
+    .about-footer a { color: var(--gold-deep); text-decoration: none; }
+    .about-footer a:hover { text-decoration: underline; }
+    .footer-sep { margin: 0 8px; color: var(--rule); }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="about-page">
+    <nav class="about-nav">
+      <a href="index.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Voltar para a ferramenta
+      </a>
+    </nav>
+
+    <div class="about-content">
+      <div class="about-hero">
+        <div class="book-mark" aria-hidden="true"><div class="book"><div class="spine"></div><div class="cover"></div></div></div>
+        <h1>E-book IA</h1>
+        <p>Gere e-books e iscas digitais (lead magnets) prontos para distribuir — com a sua própria chave de IA.</p>
+      </div>
+
+      <div class="about-section">
+        <h2><span class="ico">✦</span> O que faz</h2>
+        <p>A <strong>E-book IA</strong> transforma uma ideia em um <strong>e-book completo e diagramado</strong>, pronto para virar a sua isca digital. Você descreve o tema, o público e o objetivo; a IA escreve o conteúdo real (capa, sumário, introdução, capítulos com seções, citações e pontos-chave, conclusão e página de chamada). A ferramenta então <strong>renderiza um e-book paginado de verdade</strong> — não um esboço de tópicos — com pré-visualização ao vivo e escolha de tema visual.</p>
+        <p>No final, você baixa o material pronto: <strong>PDF</strong> (pela janela de impressão do navegador) ou um arquivo <strong>HTML autocontido</strong> para hospedar. É o artefato finalizado, pronto para captar e-mails e alimentar o seu funil.</p>
+        <div class="services-list">
+          <span class="service-badge">OpenRouter (Claude · GPT · Gemini · DeepSeek + em alta)</span>
+          <span class="service-badge">OpenAI</span>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h2><span class="ico">❧</span> Para quem</h2>
+        <p>Para membros da <strong>Comunidade Maestros da IA</strong> que constroem funis e precisam de uma isca digital de qualidade: criadores de conteúdo, infoprodutores, consultores, coaches, prestadores de serviço e donos de pequenos negócios. Se você precisa capturar e-mails, construir autoridade ou nutrir a sua lista, este e-book é o ímã. Ele combina perfeitamente com a <strong>Página de Vendas IA</strong>: a isca captura, a página converte.</p>
+      </div>
+
+      <div class="about-section">
+        <h2><span class="ico">§</span> Como usar</h2>
+        <ol class="steps-list">
+          <li><span>Verifique seu acesso com o e-mail ou WhatsApp cadastrado na Comunidade Maestros da IA.</span></li>
+          <li><span>Cole a sua chave de IA (BYOK) — recomendamos a do OpenRouter, que acessa todos os modelos com uma só chave.</span></li>
+          <li><span>Preencha a ficha do e-book: tema, público, autor, objetivo, número de capítulos, tom e a chamada final.</span></li>
+          <li><span>Clique em "Gerar e-book", escolha o tema visual e confira a prévia paginada (capa, sumário, capítulos e CTA).</span></li>
+          <li><span>Baixe em PDF (pela impressão → "Salvar como PDF") ou em HTML autocontido, e use como sua isca digital.</span></li>
+        </ol>
+      </div>
+
+      <div class="about-section">
+        <h2><span class="ico">🔒</span> Suas chaves, seu controle</h2>
+        <div class="byok-highlight">
+          <p>Esta ferramenta utiliza o modelo <strong>BYOK (Bring Your Own Key)</strong>: você insere a sua própria chave de API diretamente no navegador.</p>
+          <p>Sua chave fica armazenada <strong>apenas no localStorage do seu navegador</strong>. Ela <strong>nunca</strong> é enviada para nossos servidores, nunca é salva em banco de dados e nunca sai do seu dispositivo. Você tem controle total — pode visualizar, alterar ou apagar a sua chave a qualquer momento. Todo o custo de IA é da sua própria conta.</p>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <a href="https://ebookia.maestrosdaia.com" class="cta-btn">Acessar a ferramenta</a>
+      </div>
+    </div>
+
+    <footer class="about-footer">
+      <p>Feito com carinho para a comunidade <strong>Maestros da IA</strong></p>
+      <p style="margin-top: 8px;">
+        <a href="privacy-policy.html">Política de Privacidade</a>
+        <span class="footer-sep">·</span>
+        <a href="data-deletion.html">Solicitar Exclusão de Dados</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
