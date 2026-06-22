@@ -113,20 +113,32 @@ const App = (function() {
       headers['Authorization'] = 'Bearer ' + active.key;
     }
 
-    const body = {
-      model: model,
-      messages: [
+    // Build the request. LLM JSON validity is stochastic: even with a strong
+    // system prompt + the repair ladder below, a rare roll emits JSON that can't
+    // be salvaged (an odd stray-quote pattern, etc.). So on a parse failure we
+    // reroll ONCE with a stricter reminder + lower temperature — a fresh roll
+    // almost always parses where the first didn't. This automates the "tente
+    // gerar novamente" so the user never sees an intermittent failure (COR-032).
+    const buildBody = function(strict) {
+      const messages = [
         { role: 'system', content: 'Você responde SOMENTE com JSON válido, sem markdown e sem texto fora do objeto JSON.' },
         { role: 'user', content: prompt }
-      ],
-      temperature: 0.75,
-      // A full multi-chapter e-book is long — without a generous cap the JSON
-      // gets truncated mid-object and fails to parse. 16k covers up to 7 chapters.
-      max_tokens: 16000
+      ];
+      if (strict) {
+        messages.push({ role: 'user', content: 'ATENÇÃO: sua resposta anterior NÃO era um JSON válido. Responda novamente com APENAS o objeto JSON completo e válido — sem markdown, sem comentários, sem texto fora do JSON, e com todas as aspas internas em formato tipográfico (“ ”), nunca aspas duplas retas.' });
+      }
+      return {
+        model: model,
+        messages: messages,
+        temperature: strict ? 0.4 : 0.75,
+        // A full multi-chapter e-book is long — without a generous cap the JSON
+        // gets truncated mid-object and fails to parse. 16k covers up to 7 chapters.
+        max_tokens: 16000
+      };
     };
 
-    const doFetch = async function() {
-      const res = await fetch(endpoint, { method: 'POST', headers: headers, body: JSON.stringify(body) });
+    const doFetch = async function(strict) {
+      const res = await fetch(endpoint, { method: 'POST', headers: headers, body: JSON.stringify(buildBody(strict)) });
       if (!res.ok) {
         let detail = '';
         try { const e = await res.json(); detail = (e.error && e.error.message) || ''; } catch (_) {}
@@ -138,14 +150,22 @@ const App = (function() {
       return json.choices && json.choices[0] && json.choices[0].message && json.choices[0].message.content;
     };
 
-    let content;
-    if (window.RateLimiter && typeof RateLimiter.executeWithLimit === 'function') {
-      content = await RateLimiter.executeWithLimit('generate-ebook', doFetch);
-    } else {
-      content = await doFetch();
-    }
+    const exec = function(strict) {
+      return (window.RateLimiter && typeof RateLimiter.executeWithLimit === 'function')
+        ? RateLimiter.executeWithLimit('generate-ebook', function(){ return doFetch(strict); })
+        : doFetch(strict);
+    };
+
+    let content = await exec(false);
     if (!content) throw new Error('Resposta vazia do modelo. Tente outro modelo.');
-    return parseJSON(content);
+    try {
+      return parseJSON(content);
+    } catch (firstErr) {
+      // One stochastic reroll with stricter instructions before surfacing an error.
+      content = await exec(true);
+      if (!content) throw firstErr;
+      return parseJSON(content);
+    }
   }
 
   // Robust JSON extraction. LLMs intermittently emit JSON that JSON.parse rejects
